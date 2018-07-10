@@ -6,7 +6,7 @@
 /*   By: avan-ni <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/09 16:15:39 by avan-ni           #+#    #+#             */
-/*   Updated: 2018/07/09 18:17:46 by avan-ni          ###   ########.fr       */
+/*   Updated: 2018/07/10 12:12:56 by avan-ni          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,7 @@ void	brainfuck(char *argv, char *str)
 		if (*argv == '-')
 			*str -= 1;
 		if (*argv == '.')
-		{
 			ft_putchar(*str);
-			write(1," | ", 3);
-			ft_putchar(*argv);
-			write(1, "\n", 1);
-		}
 		if (*argv == '[' && *str == 0) 
 		{
 			loop = 0;
@@ -50,7 +45,10 @@ void	brainfuck(char *argv, char *str)
 					loop--;
 				argv++;
 				if (loop == 0)
+				{
+					argv--;
 					break ;
+				}
 			}
 		}
 		if (*argv == ']' && *str != 0)
@@ -65,17 +63,12 @@ void	brainfuck(char *argv, char *str)
 					argv--;
 					if (loop == 0)
 					{
-						argv += 2;
+						argv++;
 						break ;
 					}
 				}
 		}
 		argv++;
-
-	//ft_putchar(*argv);
-	//write(1," | ", 3);
-	//ft_putchar(*str);
-	//write(1, "\n", 1);
 	}
 }
 
@@ -86,11 +79,12 @@ int main (int argc, char **argv)
 	str = (char *)malloc(sizeof(char) * (i + 1));
 	str[i] = '\0';
 	while (i >= 0)
-		str[i--] = '0';
-
+		str[i--] = '\0';
 	if (argc == 2)
 	{
 		brainfuck(argv[1], str);
 	}
+	else
+		write(1, "\n", 1);
 	return (0);
 }
