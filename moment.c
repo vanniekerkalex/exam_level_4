@@ -52,24 +52,24 @@ char    *moment(unsigned int duration)
     {
         ans = duration / (60 * 60 * 24);
         str = "days ago.";
-		        if (ans == 1)
-            str = "day ago";
+		if (ans == 1)
+    		str = "day ago";
     }
 	else if (duration < 31104000)
     {
-        ans = duration / (60 * 60 * 24 * 30);
+    	ans = duration / (60 * 60 * 24 * 30);
         str = "months ago.";
-		        if (ans == 1)
+		if (ans == 1)
             str = "month ago";
     }
-	temp = ans;	
+	temp = ans;
 
 	while (temp != 0)
 	{
 		temp = temp / 10;
 		count++;
 	}
-	
+
 	temp = ans;
 	*(s + count) = '\0';
 	while (count-- > 0)
@@ -79,7 +79,7 @@ char    *moment(unsigned int duration)
 	}
 	if (ans == 0)
 		*s = '0';
-	
+
 	while (*(s + i))
 		i++;
 	*(s + i++) = ' ';
@@ -88,11 +88,11 @@ char    *moment(unsigned int duration)
 		*(s + i++) = *str++;
 	}
 	*(s + i) = '\0';
-	return (s);	
+	return (s);
 }
 
 int main (void)
 {
-	printf("%s", moment (2400));
+	printf("%s", moment (0));
 	return (0);
 }
