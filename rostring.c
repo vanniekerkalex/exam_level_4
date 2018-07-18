@@ -6,7 +6,9 @@ void ft_putstr(char *str)
 {
     int i = 0;
     while (*(str + i))
+    {
         write(1, &str[i++], 1);
+    }
 }
 
 int ft_strlen(char *str)
@@ -50,22 +52,21 @@ char **ft_split(char *str)
 int main (int argc, char **argv)
 {
     int i = 0;
-    int j = 1;
     char **tab;
     if (argc >= 2)
     {
-        while (argc-- >= 2)
-        {
             i = 1;
-            tab = ft_split(argv[j++]);
-            while (tab[i])
+            if (argv[1][0] != '\0')
             {
-                ft_putstr(tab[i++]);
-                write(1, " ", 1);
+                tab = ft_split(argv[1]);
+                while (tab[i])
+                {
+                    ft_putstr(tab[i++]);
+                    write(1, " ", 1);
+                }
+                ft_putstr(tab[0]);
+                write(1, "\n", 1);
             }
-            ft_putstr(tab[0]);
-            write(1, "\n", 1);
-        }
     }
     else
         write(1,"\n", 1);
